@@ -5,7 +5,7 @@ class MagicBall
     if error
       $stderr.puts "Error: #{error.description}"
     else
-      @answers = json['answers']
+      @answers = json
     end
     @answers = ['Yes', 'No', 'Maybe', 'Try Again'] unless @answers
   end
