@@ -1,9 +1,9 @@
 # We want to handle errors in a nicer way, and can take advantage of Ruby's
 # multiple-return values to do this.
-module JSON
+class NSBundle
 
-  def JSON.loadResource(path)
-    file = NSBundle.mainBundle.pathForResource(path, ofType:'json')
+  def loadJSON(path)
+    file = self.pathForResource(path, ofType:'json')
     perror = Pointer.new(:object)
     data = NSData.alloc.initWithContentsOfFile(file, options:0, error:perror)
     if !data then return nil, perror[0] end

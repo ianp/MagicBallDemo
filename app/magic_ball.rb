@@ -1,22 +1,16 @@
 class MagicBall
 
   def initialize
-    json, error = JSON.loadResource('answers')
-    if error
+    @answers, error = NSBundle.mainBundle.loadJSON('answers')
+    unless @answers
       $stderr.puts "Error: #{error.description}"
-    else
-      @answers = json
+      @answers = ['Yes', 'No', 'Maybe', 'Try Again']
     end
-    @answers = ['Yes', 'No', 'Maybe', 'Try Again'] unless @answers
   end
 
   def answer
     @answers.sample
   end
-
-private
-
-  
 
 end
 
