@@ -1,15 +1,15 @@
-# We want to handle errors in a nicer way, and can take advantage of Ruby's
-# multiple-return values to do this.
-class NSBundle
+class NSBundleLoadingError < StandardError; end
 
-  def loadJSON(path)
-    file = self.pathForResource(path, ofType:'json')
+module MainBundle
+
+  def MainBundle.loadJSON(path)
+    file = NSBundle.mainBundle.pathForResource(path, ofType:'json')
     perror = Pointer.new(:object)
     data = NSData.alloc.initWithContentsOfFile(file, options:0, error:perror)
-    if !data then return nil, perror[0] end
+    if !data then raise NSBundleLoadingError, perror[0] end
     json = NSJSONSerialization.JSONObjectWithData(data, options:0, error:perror)
-    if !json then return nil, perror[0] end
-    return json, nil
+    if !json then raise NSBundleLoadingError, perror[0] end
+    return json
   end
 
 end

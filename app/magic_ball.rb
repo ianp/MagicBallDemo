@@ -1,11 +1,10 @@
 class MagicBall
 
   def initialize
-    @answers, error = NSBundle.mainBundle.loadJSON('answers')
-    unless @answers
-      $stderr.puts "Error: #{error.description}"
-      @answers = ['Yes', 'No', 'Maybe', 'Try Again']
-    end
+    @answers = MainBundle.loadJSON('answers')
+  rescue NSBundleLoadingError => error
+    $stderr.puts "Error: #{error.description}"
+    @answers = ['Yes', 'No', 'Maybe', 'Try Again']
   end
 
   def answer
