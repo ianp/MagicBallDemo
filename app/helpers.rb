@@ -21,7 +21,7 @@ class UIView
     self.userInteractionEnabled = true
     self.addGestureRecognizer(UITapGestureRecognizer.alloc.initWithTarget(proc, action:'call'))
     @recognizers ||= {}
-    @recognizers["#{proc}"] = proc
+    @recognizers[proc.to_s] = proc
   end
 
 end
