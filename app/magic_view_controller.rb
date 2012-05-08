@@ -2,7 +2,7 @@ class MagicViewController < UIViewController
 
   def viewDidLoad
     @magicBall = MagicBall.new
-    @label = self.view.subviews.first
+    @label = view.subviews[0]
 
     view.image = UIImage.imageNamed('background.png')
     view.whenTapped do
@@ -27,7 +27,7 @@ private
 
   def createTransform(dir)
     r = Math::PI
-    t = -self.view.bounds.size.width
+    t = -view.bounds.size.width
     if dir == :out then r = -r; t = -t end
     CGAffineTransformTranslate(
       CGAffineTransformRotate(
