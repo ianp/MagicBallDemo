@@ -18,7 +18,6 @@ end
 class UIView
 
   def whenTapped(&proc)
-    userInteractionEnabled = true
     addGestureRecognizer(UITapGestureRecognizer.alloc.initWithTarget(proc, action:'call'))
     @recognizers ||= {}
     @recognizers[proc.to_s] = proc
